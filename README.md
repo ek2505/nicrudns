@@ -13,7 +13,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/libdns/libdns"
-	"github.com/libdns/nicrudns"
+	"github.com/ek2505/nicrudns"
 	"github.com/pkg/errors"
 	"time"
 )

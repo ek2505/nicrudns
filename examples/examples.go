@@ -3,10 +3,11 @@ package examples
 import (
 	"context"
 	"fmt"
-	"github.com/libdns/libdns"
-	"github.com/libdns/nicrudns"
-	"github.com/pkg/errors"
 	"time"
+
+	"github.com/ek2505/nicrudns"
+	"github.com/libdns/libdns"
+	"github.com/pkg/errors"
 )
 
 var (
