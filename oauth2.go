@@ -2,9 +2,10 @@ package nicrudns
 
 import (
 	"context"
+	"net/http"
+
 	"github.com/pkg/errors"
 	"golang.org/x/oauth2"
-	"net/http"
 )
 
 func (client *Client) GetOauth2Client() (*http.Client, error) {
@@ -24,24 +25,12 @@ func (client *Client) GetOauth2Client() (*http.Client, error) {
 		Scopes: []string{OAuth2Scope},
 	}
 
-	cachedToken, _ := client.ReadCacheFile()
-	if cachedToken != nil {
-		client.oauth2client = oauth2Config.Client(ctx, cachedToken)
-		_, err := client.GetServices()
-		if err == nil {
-			return client.oauth2client, nil
-		}
-	}
-
 	oauth2Token, err := oauth2Config.PasswordCredentialsToken(ctx, client.provider.Username, client.provider.Password)
 	if err != nil {
 		return nil, errors.Wrap(err, AuthorizationError.Error())
 	}
 
 	client.oauth2client = oauth2Config.Client(ctx, oauth2Token)
-	if err := client.UpdateCacheFile(oauth2Token); err != nil {
-		return nil, errors.Wrap(err, UpdateTokenCacheFileError.Error())
-	}
 
 	return client.oauth2client, nil
 }
