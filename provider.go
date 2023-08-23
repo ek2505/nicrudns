@@ -3,10 +3,11 @@ package nicrudns
 import (
 	"context"
 	"fmt"
-	"github.com/libdns/libdns"
-	"github.com/pkg/errors"
 	"strconv"
 	"time"
+
+	"github.com/libdns/libdns"
+	"github.com/pkg/errors"
 )
 
 // Provider facilitates DNS record manipulation with NIC.ru.
